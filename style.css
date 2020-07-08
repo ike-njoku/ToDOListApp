@@ -1,0 +1,111 @@
+body {
+    /* remove default margins and padding */
+    margin: 0px;
+    padding: 0px;
+    background-color: rgba(11, 78, 109, 0.185)
+}
+
+
+/* header */
+
+.header {
+    padding: 2%;
+    font-size: x-large;
+    font-weight: bolder;
+    text-align: justify;
+}
+
+.addButton,
+.searchButton {
+    background-color: green;
+    border: none;
+    outline: none;
+    float: right;
+    padding: 1.2em 1.4em 1.2em;
+    /* border radius */
+    border-radius: 50%;
+}
+
+.searchButton {
+    background-color: darkslateblue;
+}
+
+.addButton:hover {
+    /* hover over the add button */
+    opacity: 75%;
+    background-color: darkslateblue;
+}
+
+
+/* container */
+
+.conatiner {
+    background-color: grey;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.todoContainer {
+    padding: 2%;
+}
+
+
+/* ul */
+
+ul {
+    /* remove the indentation in th UL */
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* individal todoItems */
+
+ul li {
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 1%;
+    padding: 2%;
+    list-style-type: none;
+    display: block;
+    background-color: dodgerblue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+/* input */
+
+.newTodoDropdown input,
+.newTodoDropdown button {
+    padding: 1%;
+    outline: none;
+    border: none;
+}
+
+
+/* input buttons hover */
+
+.newTodoDropdown button:hover {
+    background-color: green;
+}
+
+
+/* container for the title of the todo item */
+
+ul li div {
+    grid-column: span 3;
+}
+
+ul li span {
+    font-size: x-large;
+}
+
+
+/* media queries  */
+
+@media (max-width:235px) {
+    .addButton {
+        padding: 4.2% 5.2% 4.2%;
+    }
+}
