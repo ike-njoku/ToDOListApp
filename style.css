@@ -15,8 +15,7 @@ body {
     text-align: justify;
 }
 
-.addButton,
-.searchButton {
+.addButton {
     background-color: green;
     border: none;
     outline: none;
@@ -24,10 +23,6 @@ body {
     padding: 1.2em 1.4em 1.2em;
     /* border radius */
     border-radius: 50%;
-}
-
-.searchButton {
-    background-color: darkslateblue;
 }
 
 .addButton:hover {
@@ -41,6 +36,7 @@ body {
 
 .conatiner {
     background-color: grey;
+    width: 98vw;
     display: grid;
     grid-template-columns: 1fr;
 }
@@ -74,13 +70,53 @@ ul li {
 }
 
 
+/* container for new todo item input */
+
+.newTodoDropdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.span-col-3 {
+    grid-column: span 5;
+}
+
+.span-col-2 {
+    grid-column: span 4;
+}
+
+
 /* input */
 
 .newTodoDropdown input,
-.newTodoDropdown button {
-    padding: 1%;
+.newTodoDropdown button,
+.searchTodoItems {
+    padding: 2%;
     outline: none;
     border: none;
+    margin: 1%;
+}
+
+#cancelButton {
+    float: right;
+}
+
+#saveButton {
+    float: right;
+}
+
+
+/* container for the add Todo input field */
+
+
+/* search todo Items*/
+
+.searchTodoItems {
+    width: 95vw;
+}
+
+.newTodoDropdown input {
+    width: 98%;
 }
 
 

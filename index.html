@@ -18,21 +18,23 @@
             <button data-addItem class="addButton">&plus;</button>
             <hr>
             <div data-newTodoDropdown class="newTodoDropdown">
-                <input data-toDoForm type="text" class="newToDoItem">
-                <button data-saveButton id="saveButton">save</button>
-                <button data-cancel id="cancelButton">cancel</button>
+                <div class="span-col-3">
+                    <input data-toDoForm type="text" class="newToDoItem" placeholder="what do you want to do">
+                </div>
+                <div class="span-col-2">
+                    <button data-saveButton id="saveButton">save</button>
+                    <button data-cancel id="cancelButton">cancel</button>
+                </div>
             </div>
+            <input data-searchForm class="searchTodoItems" type="search" placeholder="search todo list">
         </div>
+
+
 
         <div class="todoContainer">
             <ul data-list>
                 <!-- new todo items go here dynamically -->
-                <li>
 
-                    <div>${this.cookieName}</div>
-                    <span> ...
-                    </span>
-                </li>
             </ul>
         </div>
     </div>

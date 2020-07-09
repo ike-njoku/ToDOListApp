@@ -13,7 +13,8 @@ const ulTag = document.querySelector('[data-list]');
 // cancel button
 const cancelButton = document.querySelector('[data-cancel]');
 
-
+// search form
+const seachForm = document.querySelector('[data-searchForm]');
 
 
 
@@ -89,6 +90,12 @@ class ToDO {
 
     // update display
     updateDisplay(todos) {
+        // what to do if the form is emptty
+        if (todos.length == 0) {
+            // clear the form input
+            toDoForm.value = '';
+            return;
+        }
 
         // clear the form
         toDoForm.value = '';
@@ -99,7 +106,6 @@ class ToDO {
 
         // this.todoItem refers to each item being displayed
         this.todoItemName = this.todoItems[0];
-        console.log(this.todoItemName);
 
         // construct the display tobe rendered
 
@@ -120,36 +126,33 @@ class ToDO {
 
     }
 
-
-
-
 }
 
 // create an instance of a to do class
 const todo = new ToDO();
 
 // hide / display creating a new todoItem
-addButton.addEventListener('click', () => {
-    if (newTodoDropdown.style.display == 'block') newTodoDropdown.style.display = 'none';
-    else newTodoDropdown.style.display = 'block';
-});
+// make the hide or show search form a constant since it would be called by the cancel button too
+const hideOrShowSearchForm = function() {
+    if (newTodoDropdown.style.display == 'grid') {
+        newTodoDropdown.style.display = 'none';
+        seachForm.style.display = 'block';
+    } else {
+        newTodoDropdown.style.display = 'grid';
+        seachForm.style.display = 'none';
+    }
+};
+
+addButton.addEventListener('click', () => hideOrShowSearchForm());
 
 // add todoItem
 saveButton.addEventListener('click', () => todo.addItem());
 cancelButton.addEventListener('click', () => {
-    newTodoDropdown.style.display = 'none';
-    toDoForm.value = '';
+
+    hideOrShowSearchForm();
+
+    // clear the input form (confer todo.updateDisplay());
+
+    let emptySearchForm = '';
+    todo.updateDisplay(emptySearchForm);
 });
-
-
-
-
-
-
-
-// <li class="toDoItem">
-
-//     <div>${this.cookieName}</div>
-//     <span> ...
-//     </span>
-// </li>
