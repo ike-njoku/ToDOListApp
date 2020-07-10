@@ -16,7 +16,7 @@ const cancelButton = document.querySelector('[data-cancel]');
 // search form
 const seachForm = document.querySelector('[data-searchForm]');
 
-
+const emptySearchForm = '';
 
 
 // hide  .newTodoDropdown  by default
@@ -56,27 +56,40 @@ class ToDO {
 
         // call the filterItems method to generate the list of todo items to display
         // send all the todo items that have been stored
-        this.filterItems(document.cookie.split(';'));
+        this.arrayOfTodosToFilter = document.cookie.split(';');
+        ulTag.innerHTML = '';
+        this.filterItems(this.arrayOfTodosToFilter);
     }
 
-    // filter toDo items
-    filterItems(arrayofToDos) {
+    // filter toDo item
+
+    filterItems(searchTerm) {
         // arrayofToDos is the array  that has been received and is being filtered
-        // UpdateDisplay method to be displayed on the screen
 
 
 
-        arrayofToDos.forEach(keyvalues => {
-            // emmit the keyvalue pairs that will be used by update display
-            this.updateDisplay(keyvalues);
-        });
+        if (seachForm.value !== '') {
+
+
+            // if the search form is not empty, that means that a search is being carried out
+
+
+            document.cookie.split(';').forEach(itemPair => {
+
+                if (itemPair.includes(searchTerm)) this.updateDisplay(itemPair);
+            });
+
+        } else {
+            document.cookie.split(';').forEach(item => {
+
+                this.updateDisplay(item);
+            })
+        }
 
 
 
     }
 
-    // search for Item
-    searchItem() {}
 
 
     // restore item
@@ -90,15 +103,12 @@ class ToDO {
 
     // update display
     updateDisplay(todos) {
-        // what to do if the form is emptty
-        if (todos.length == 0) {
-            // clear the form input
-            toDoForm.value = '';
-            return;
-        }
+        // if the parameter passed to this method is an empty string, return
+        if (todos == '') return;
 
         // clear the form
         toDoForm.value = '';
+
 
         // split the todos which have been received as key pair values
         // into  a key and a pair and display the key
@@ -121,7 +131,15 @@ class ToDO {
         createLiElement.appendChild(createDivElement);
 
         // attach the li element to the ul tag
+
+
+        // append li element
         ulTag.appendChild(createLiElement);
+
+
+
+
+
 
 
     }
@@ -140,6 +158,7 @@ const hideOrShowSearchForm = function() {
     } else {
         newTodoDropdown.style.display = 'grid';
         seachForm.style.display = 'none';
+        seachForm.value = '';
     }
 };
 
@@ -153,6 +172,25 @@ cancelButton.addEventListener('click', () => {
 
     // clear the input form (confer todo.updateDisplay());
 
-    let emptySearchForm = '';
+
     todo.updateDisplay(emptySearchForm);
 });
+
+// search for a todo item
+// pass the value of the search bar to the filterItems method to find matching
+// instances in the list of todos( in the cookies);
+seachForm.addEventListener('keyup', () => {
+    // first clear the content of the ul incase it is already displaying something
+    // this way, we can append li elements based on search results
+    ulTag.innerHTML = '';
+
+    if (seachForm.value == emptySearchForm)
+    // clear the content of the ul tag so that li elements can be attached/appended
+        ulTag.innerHTML = '';
+    todo.filterItems(seachForm.value);
+});
+
+
+// call the todo.updateDisplay function when the document loads to display list of
+// todos by default
+document.onload = todo.filterItems(emptySearchForm);
