@@ -1,6 +1,5 @@
 // define constants
 
-// declear constants
 const addButton = document.querySelector('[data-addItem]');
 // submit new todo button
 const saveButton = document.querySelector('[data-saveButton]');
@@ -23,6 +22,7 @@ const emptySearchForm = '';
 const newTodoDropdown = document.querySelector('[data-newTodoDropdown]');
 newTodoDropdown.style.display = 'none';
 
+
 // create a todo class with all the methods
 class ToDO {
     // constructor
@@ -38,10 +38,12 @@ class ToDO {
 
 
     // ceate new item
-    addItem() {
-        // check if the input field is empty. if it is, return
+    addItem(itemname, itemstatus) {
+        // check if the new todo input field is empty and no parameters were received. if it is, return
 
-        if (toDoForm.value.length == 0) {
+
+
+        if (toDoForm.value.length == 0 && itemname.length == 0 && itemstatus.length == 0) {
             window.alert('please add a to do item');
             return;
         }
@@ -50,9 +52,18 @@ class ToDO {
         // let the name/title of the todo item be the key of the cookie and then the value would be true
         // or false if or not the item has beendone
 
+
         this.itemName = toDoForm.value;
-        this.completionStatus = 'false';
+        this.completionStatus = false;
+
+        // make use of parameters received (confer this.completeItem)
+        if (itemname && itemstatus) {
+            this.itemName = itemname;
+            this.completionStatus = itemstatus;
+        }
+
         document.cookie = this.itemName + '=' + this.completionStatus;
+
 
         // call the filterItems method to generate the list of todo items to display
         // send all the todo items that have been stored
@@ -64,8 +75,6 @@ class ToDO {
     // filter toDo item
 
     filterItems(searchTerm) {
-        // arrayofToDos is the array  that has been received and is being filtered
-
 
 
         if (seachForm.value !== '') {
@@ -80,10 +89,11 @@ class ToDO {
             });
 
         } else {
-            document.cookie.split(';').forEach(item => {
+            //
+            document.cookie.split(';').forEach(itemPair => {
 
-                this.updateDisplay(item);
-            })
+                this.updateDisplay(itemPair);
+            });
         }
 
 
@@ -91,23 +101,37 @@ class ToDO {
     }
 
 
-
-    // restore item
-    restoreItem() {}
-
-    // delete an existing item
-    deleteItem() {}
-
     // mark as complete
-    completeItem() {}
+    completeItem(todoItemName) {
+
+        this.todoItemName = todoItemName;
+
+        //search for the array that has todoitemname
+        document.cookie.split(';').forEach(keyValue => {
+            let itemPair = keyValue.split('=');
+            if (itemPair[0] == todoItemName) {
+
+                // redefine the vlue of the completion status
+                if (itemPair[1] == 'false') this.completionStatus = 'true';
+                else this.completionStatus = 'false';
+            }
+
+        });
+
+
+
+        // pass the todoItem name and the  the completion status to addItem() a new cookie with the value
+        this.addItem(this.todoItemName, this.completionStatus);
+
+
+    }
 
     // update display
     updateDisplay(todos) {
         // if the parameter passed to this method is an empty string, return
         if (todos == '') return;
 
-        // clear the form
-        toDoForm.value = '';
+        // clear the false        toDoForm.value = '';
 
 
         // split the todos which have been received as key pair values
@@ -116,7 +140,7 @@ class ToDO {
 
         // this.todoItem refers to each item being displayed
         this.todoItemName = this.todoItems[0];
-
+        this.todoItemCompletionStatus = this.todoItems[1];
         // construct the display tobe rendered
 
         // append each todoName to the screen (for this part, refer to styles.css for styling)
@@ -127,8 +151,30 @@ class ToDO {
         // attach the todo item name to the div
         createDivElement.innerHTML = this.todoItemName;
 
+
         // append the div element to the li element
         createLiElement.appendChild(createDivElement);
+
+
+
+
+        // create a check box
+        // first create an input
+        let createCheckBox = document.createElement('input');
+        // designate a type of 'checkbox' to  the input
+        createCheckBox.type = 'checkbox';
+
+        createCheckBox.name = this.todoItemName;
+        // attach a function call to each checkbox
+
+
+
+        createCheckBox.setAttribute('onchange', 'todo.completeItem(name)');
+
+
+
+        // attach the checkbox to the li element
+        createLiElement.appendChild(createCheckBox);
 
         // attach the li element to the ul tag
 
@@ -136,9 +182,11 @@ class ToDO {
         // append li element
         ulTag.appendChild(createLiElement);
 
+        if (this.todoItemCompletionStatus == 'true') {
 
-
-
+            createDivElement.innerHTML = '<del> ' + this.todoItemName + ' </del>';
+            createCheckBox.checked = true;
+        }
 
 
 

@@ -19,11 +19,13 @@
             <hr>
             <div data-newTodoDropdown class="newTodoDropdown">
                 <div class="span-col-3">
-                    <input data-toDoForm type="text" class="newToDoItem" placeholder="what do you want to do">
+                    <form>
+                        <input data-toDoForm type="text" class="newToDoItem" placeholder="what do you want to do">
                 </div>
                 <div class="span-col-2">
-                    <button data-saveButton id="saveButton">save</button>
+                    <button type="submit" data-saveButton id="saveButton">save</button>
                     <button data-cancel id="cancelButton">cancel</button>
+                    </form>
                 </div>
             </div>
             <input data-searchForm class="searchTodoItems" type="search" placeholder="search todo list">
@@ -38,6 +40,8 @@
             </ul>
         </div>
     </div>
+
+
 
 </body>
 

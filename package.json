@@ -16,5 +16,6 @@
     "bugs": {
         "url": "https://github.com/ike-njoku/ToDOListApp/issues"
     },
-    "homepage": "https://github.com/ike-njoku/ToDOListApp#readme"
+    "homepage": "https://github.com/ike-njoku/ToDOListApp#readme",
+    "dependencies": {}
 }

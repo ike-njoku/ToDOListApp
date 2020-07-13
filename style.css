@@ -133,8 +133,9 @@ ul li div {
     grid-column: span 3;
 }
 
-ul li span {
-    font-size: x-large;
+ul li input {
+    border: none;
+    outline: none;
 }
 
 
