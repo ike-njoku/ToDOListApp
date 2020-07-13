@@ -56,7 +56,7 @@ class ToDO {
         this.itemName = toDoForm.value;
         this.completionStatus = false;
 
-        // make use of parameters received (confer this.completeItem)
+        // make use of parameters received (confer)
         if (itemname && itemstatus) {
             this.itemName = itemname;
             this.completionStatus = itemstatus;
@@ -69,7 +69,18 @@ class ToDO {
         // send all the todo items that have been stored
         this.arrayOfTodosToFilter = document.cookie.split(';');
         ulTag.innerHTML = '';
-        this.filterItems(this.arrayOfTodosToFilter);
+
+        if (seachForm.value) {
+            // if the user is typing something in the search bar: (confer completeItem())
+            document.cookie.split(';').forEach(itemPair => {
+
+                this.updateDisplay(itemPair);
+            });
+
+        } else {
+            this.filterItems(this.arrayOfTodosToFilter);
+
+        }
     }
 
     // filter toDo item
@@ -85,7 +96,9 @@ class ToDO {
 
             document.cookie.split(';').forEach(itemPair => {
 
-                if (itemPair.includes(searchTerm)) this.updateDisplay(itemPair);
+                if (itemPair.includes(searchTerm)) {
+                    this.updateDisplay(itemPair);
+                }
             });
 
         } else {
@@ -95,7 +108,6 @@ class ToDO {
                 this.updateDisplay(itemPair);
             });
         }
-
 
 
     }
