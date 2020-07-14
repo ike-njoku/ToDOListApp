@@ -8,6 +8,11 @@ body {
 
 /* header */
 
+html,
+body {
+    min-width: 330px;
+}
+
 .header {
     padding: 2%;
     font-size: x-large;

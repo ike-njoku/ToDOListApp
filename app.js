@@ -191,7 +191,8 @@ class ToDO {
 
 
 
-        createCheckBox.setAttribute('onchange', 'todo.completeItem(name)');
+        // createCheckBox.setAttribute('onchange', 'todo.completeItem(name)');
+        createCheckBox.addEventListener('change', () => { todo.completeItem(createCheckBox.name); });
 
 
 
