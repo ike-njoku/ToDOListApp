@@ -62,7 +62,17 @@ class ToDO {
             this.completionStatus = itemstatus;
         }
 
-        document.cookie = this.itemName + '=' + this.completionStatus;
+        // set the expirey date of the cookie
+        let date = new Date();
+
+        let milliSeconds = '';
+
+        //if the item has been completed, it disappears from the list after three days else it stays 60 days
+        if (this.completionStatus == 'true') { milliSeconds = 259200000; } else { milliSeconds = 5184000000; }
+        let expirey_date = date.toUTCString(date.setTime(date.getTime() + milliSeconds));
+
+
+        document.cookie = this.itemName + '=' + this.completionStatus + ';' + 'expires = ' + expirey_date;
 
 
         // call the filterItems method to generate the list of todo items to display
