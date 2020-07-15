@@ -43,7 +43,7 @@ class ToDO {
 
 
 
-        if (toDoForm.value.length == 0 && itemname.length == 0 && itemstatus.length == 0) {
+        if (toDoForm.value.length == 0 && !(itemname && itemstatus)) {
             window.alert('please add a to do item');
             return;
         }
