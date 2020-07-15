@@ -104,10 +104,17 @@ ul li {
 
 #cancelButton {
     float: right;
+    padding: 6.5%;
 }
 
 #saveButton {
     float: right;
+    padding: 6.5%;
+}
+
+#cancelButton:hover,
+#saveButton:hover {
+    background-color: cornflowerblue;
 }
 
 
