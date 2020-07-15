@@ -67,8 +67,8 @@ class ToDO {
 
         let milliSeconds = '';
 
-        //if the item has been completed, it disappears from the list after three days else it stays 60 days
-        if (this.completionStatus == 'true') { milliSeconds = 259200000; } else { milliSeconds = 5184000000; }
+        //if the item has been completed, it disappears from the list after 45 seconds else it stays 60 days
+        if (this.completionStatus == 'true') { milliSeconds = 45000; } else { milliSeconds = 5184000000; }
         let expirey_date = date.toUTCString(date.setTime(date.getTime() + milliSeconds));
 
 
