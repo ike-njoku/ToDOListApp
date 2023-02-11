@@ -20,6 +20,6 @@
     },
     "homepage": "https://github.com/ike-njoku/ToDOListApp#readme",
     "dependencies": {
-        "nodemon": "^2.0.7"
+        "nodemon": "^2.0.20"
     }
 }
